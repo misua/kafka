@@ -67,10 +67,13 @@ func orderHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	// 3. Publish the order message to Kafka
+	topicString := kafkaTopic
 	err = producer.Produce(&kafka.Message{
-		TopicPartition: kafka.TopicPartition{Topic: kafka.String(kafkaTopic), Partition: kafka.PartitionAny},
-		Value:          orderBytes,
-		Key:            []byte(order.OrderID),
+		TopicPartition: kafka.TopicPartition{
+			Topic:     &topicString,
+			Partition: kafka.PartitionAny},
+		Value: orderBytes,
+		Key:   []byte(order.OrderID),
 	}, nil)
 
 	if err != nil {

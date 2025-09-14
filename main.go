@@ -1,14 +1,8 @@
 package main
 
-import ("net/http")
-	"net/http"
-	"fmt"
+import (
 	"log"
-	"encoding/json"
-	"time"
-
-	"github.com/google/uuid"
-	"github.com/confluentinc/confluent-kafka-go/v2/kafka"
+	"net/http"
 )
 
 func main() {

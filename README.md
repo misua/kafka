@@ -3,11 +3,15 @@
 1. docker-compose up -d
 2. docker exec -it kafka bash (once kafka docker is up)
 3. create a kafka topic
+
 ```kafka-topics.sh --create --topic <topic-name> --partitions <number> --replication-factor <number> --bootstrap-server localhost:9092```
 
---topic  - topic name
--- how many partitions? - dictates how many consumers it can accomodate
--- replication-factor - how many machines/instances 
+```--topic  - topic name```
+
+```-- how many partitions? - dictates how many consumers it can accomodate```
+
+```-- replication-factor - how many machines/instances ```
+
 
 4. monitor in realtime kafka 
 

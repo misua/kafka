@@ -1,4 +1,4 @@
-##Setup sequence
+### Setup sequence
 
 1. docker-compose up -d
 2. docker exec -it kafka bash (once kafka docker is up)
@@ -6,7 +6,8 @@
 
 ```kafka-topics.sh --create --topic <topic-name> --partitions <number> --replication-factor <number> --bootstrap-server localhost:9092```
 
-```--topic  - topic name
+```
+    --topic  - topic name
 
     -- how many partitions? - dictates how many consumers it can accomodate
 
@@ -22,5 +23,10 @@
 5. run go . (in main dir of the endpoint)
 
 
-TODO
-consumer endpoints that writes to db?
+### TODO
+-- how to write to db?
+
+-- create clusternativepg - if in gcp have the nodes in diff regions
+
+
+-- k8s should be up and running and use cilium cni

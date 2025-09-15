@@ -6,11 +6,12 @@
 
 ```kafka-topics.sh --create --topic <topic-name> --partitions <number> --replication-factor <number> --bootstrap-server localhost:9092```
 
-```--topic  - topic name```
+```--topic  - topic name
 
-```-- how many partitions? - dictates how many consumers it can accomodate```
+    -- how many partitions? - dictates how many consumers it can accomodate
 
-```-- replication-factor - how many machines/instances ```
+    -- replication-factor - how many machines/instances
+```
 
 
 4. monitor in realtime kafka 
@@ -22,3 +23,4 @@
 
 
 TODO
+consumer endpoints that writes to db?

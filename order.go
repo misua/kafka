@@ -54,6 +54,16 @@ func orderHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	// process the order from json payload in request body
+
+	// 1. json.NewDecoder(r.Body) is the entire raw json payload
+	// .Decode knows how to map json fields to struct fields
+	// &order is a pointer to the order struct we want to populate
+	// if the json payload is malformed, Decode will return an error
+	// and we respond with a 400 Bad Request status code
+	// otherwise, order struct is populated with data from json payload
+	// e.g. {"id":"123","user_id":"u456","total":99.99,"status":"pending","timestamp":"2024-10-01T12:34:56Z"}
+	// will populate order.OrderID = "123", order.UserID = "u456", etc.
+	// Note: Timestamp should be in RFC3339 format for proper parsing
 	var order Order
 	if err := json.NewDecoder(r.Body).Decode(&order); err != nil {
 		http.Error(w, "Bad request", http.StatusBadRequest)

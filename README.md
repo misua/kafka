@@ -131,7 +131,7 @@ The server will start on port 8080 and begin accepting order requests.
 
 ## Testing the Service
 
-### Send a Test Order
+### Manual Testing - Send a Single Test Order
 ```bash
 curl -X POST http://localhost:8080/order \
   -H "Content-Type: application/json" \
@@ -144,8 +144,41 @@ curl -X POST http://localhost:8080/order \
   }'
 ```
 
+### Load Testing - Send Multiple Orders with Script
+
+The `generatekafka.sh` script automates sending 100 random order requests to test throughput and message processing.
+
+**Script Features**:
+- Generates 100 unique orders with random data
+- Uses `uuidgen` for unique order IDs
+- Randomizes user IDs, order totals, and statuses
+- Timestamps each order with current UTC time
+- Reports HTTP status code for each request
+
+**Run the load test**:
+```bash
+chmod +x generatekafka.sh
+./generatekafka.sh
+```
+
+**Script generates random data**:
+- Order ID: `ORD-` prefix with 10-character UUID (e.g., `ORD-A1B2C3D4E5`)
+- User ID: Random between `user-100` and `user-999`
+- Total: Random amount between $10.00 and $500.00
+- Status: Randomly selected from `pending`, `processing`, `shipped`, `delivered`, `cancelled`
+- Timestamp: Current UTC time in ISO 8601 format
+
+**Expected Output**:
+```
+Sending 100 POST requests to http://localhost:8080/order...
+Request 1/100 - Status Code: 202
+Request 2/100 - Status Code: 202
+...
+Request 100/100 - Status Code: 202
+```
+
 ### Verify Message Delivery
-Check the console consumer output to see the published message, and check the Go application logs for delivery confirmation.
+Check the console consumer output to see the published messages, and check the Go application logs for delivery confirmation.
 
 ## TODO
 - How to write to database from Kafka consumer?
